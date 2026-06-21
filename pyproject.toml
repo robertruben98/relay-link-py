@@ -1,0 +1,96 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "relay-link-py"
+version = "0.1.0"
+description = "Python client for the Relay Protocol API (relay.link) — fast crosschain bridging and swaps."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+authors = [{ name = "Robert Ruben" }]
+keywords = [
+    "relay",
+    "relay-link",
+    "crosschain",
+    "bridge",
+    "swap",
+    "defi",
+    "ethereum",
+    "web3",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+dependencies = [
+    "httpx>=0.24",
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+exec = [
+    "web3>=6.0",
+    "solders>=0.18",
+]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.23",
+    "respx>=0.20",
+    "mypy>=1.8",
+    "ruff>=0.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/robertruben98/relay-link-py"
+Repository = "https://github.com/robertruben98/relay-link-py"
+Documentation = "https://docs.relay.link"
+Issues = "https://github.com/robertruben98/relay-link-py/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/relay_link"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/examples",
+    "/README.md",
+    "/LICENSE",
+    "/pyproject.toml",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "B", "UP", "C4", "SIM"]
+# UP007/UP045 would rewrite Optional[X]/Union to PEP 604 `X | None`, which
+# pydantic evaluates at runtime and breaks on Python 3.9. Keep them off.
+ignore = ["UP007", "UP045"]
+
+[tool.mypy]
+# mypy refuses to run targeting 3.9 locally; 3.10 is the lowest it accepts.
+# Python 3.9 runtime compatibility is verified by the CI test matrix instead.
+python_version = "3.10"
+strict = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "integration: live network tests (deselected by default)",
+]
+addopts = "-m 'not integration'"
