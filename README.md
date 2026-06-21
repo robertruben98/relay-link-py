@@ -1,5 +1,10 @@
 # relay-link-py
 
+[![CI](https://github.com/robertruben98/relay-link-py/actions/workflows/ci.yml/badge.svg)](https://github.com/robertruben98/relay-link-py/actions/workflows/ci.yml)
+[![PyPI version](https://img.shields.io/pypi/v/relay-link-py.svg)](https://pypi.org/project/relay-link-py/)
+[![Python versions](https://img.shields.io/pypi/pyversions/relay-link-py.svg)](https://pypi.org/project/relay-link-py/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/robertruben98/relay-link-py/blob/main/LICENSE)
+
 A typed Python client for the [Relay Protocol](https://relay.link) API — a fast
 crosschain bridge and swap protocol. Sync and async, pydantic v2 models,
 `py.typed`, no network needed to import.
