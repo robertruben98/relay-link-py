@@ -9,7 +9,14 @@ from typing import Any, Optional, Union
 
 import httpx
 
-from .exceptions import RelayAPIError, RelayError
+from . import transport
+from .exceptions import (
+    RelayAPIError,
+    RelayConnectionError,
+    RelayError,
+    RelayRateLimitError,
+    RelayTimeoutError,
+)
 from .models import (
     Chain,
     ChainsResponse,
@@ -20,8 +27,11 @@ from .models import (
     TransactionStatus,
 )
 from .requests import PriceRequest, QuoteRequest
+from .transport import RETRYABLE_STATUSES, backoff_delay, parse_retry_after
 
 DEFAULT_BASE_URL = "https://api.relay.link"
+DEFAULT_MAX_RETRIES = 3
+DEFAULT_BACKOFF_BASE = 0.5
 
 #: Status values that mean the request will not change further.
 TERMINAL_STATUSES = frozenset({"success", "failure", "refund"})
@@ -41,11 +51,15 @@ class _BaseRelayClient:
         api_key: Optional[str] = None,
         api_key_header: str = "x-api-key",
         timeout: float = 30.0,
+        max_retries: int = DEFAULT_MAX_RETRIES,
+        backoff_base: float = DEFAULT_BACKOFF_BASE,
     ) -> None:
         self.base_url = base_url.rstrip("/")
         self.api_key = api_key
         self.api_key_header = api_key_header
         self.timeout = timeout
+        self.max_retries = max_retries
+        self.backoff_base = backoff_base
 
     def _headers(self) -> dict[str, str]:
         headers = {"Accept": "application/json"}
@@ -53,10 +67,34 @@ class _BaseRelayClient:
             headers[self.api_key_header] = self.api_key
         return headers
 
+    def _should_retry(self, response: httpx.Response, attempt: int) -> bool:
+        return response.status_code in RETRYABLE_STATUSES and attempt < self.max_retries
+
+    def _delay_for(self, response: httpx.Response, attempt: int) -> float:
+        return backoff_delay(
+            base=self.backoff_base,
+            attempt=attempt,
+            retry_after=parse_retry_after(response.headers),
+        )
+
     @staticmethod
-    def _handle(response: httpx.Response) -> Any:
+    def _success(response: httpx.Response) -> Any:
+        """Parse a successful response, or raise the right typed API error."""
         if response.is_success:
             return response.json()
+        if response.status_code == 429:
+            body: Optional[Any] = None
+            try:
+                body = response.json()
+            except ValueError:
+                body = None
+            base_err = RelayAPIError.from_response(response)
+            raise RelayRateLimitError(
+                status_code=429,
+                message=base_err.message,
+                body=body,
+                retry_after=parse_retry_after(response.headers),
+            )
         raise RelayAPIError.from_response(response)
 
 
@@ -73,9 +111,11 @@ class RelayClient(_BaseRelayClient):
         api_key: Optional[str] = None,
         api_key_header: str = "x-api-key",
         timeout: float = 30.0,
+        max_retries: int = DEFAULT_MAX_RETRIES,
+        backoff_base: float = DEFAULT_BACKOFF_BASE,
         http_client: Optional[httpx.Client] = None,
     ) -> None:
-        super().__init__(base_url, api_key, api_key_header, timeout)
+        super().__init__(base_url, api_key, api_key_header, timeout, max_retries, backoff_base)
         self._client = http_client or httpx.Client(timeout=timeout)
         self._owns_client = http_client is None
 
@@ -94,21 +134,43 @@ class RelayClient(_BaseRelayClient):
         if self._owns_client:
             self._client.close()
 
+    def _request(
+        self,
+        method: str,
+        path: str,
+        *,
+        params: Optional[dict[str, Any]] = None,
+        json_body: Optional[dict[str, Any]] = None,
+    ) -> Any:
+        url = f"{self.base_url}{path}"
+        attempt = 0
+        while True:
+            try:
+                response = self._client.request(
+                    method,
+                    url,
+                    params=_clean_params(params or {}),
+                    json=json_body,
+                    headers=self._headers(),
+                )
+            except httpx.TimeoutException as exc:
+                raise RelayTimeoutError(f"Request to {url} timed out") from exc
+            except httpx.TransportError as exc:
+                raise RelayConnectionError(f"Failed to connect to {url}: {exc}") from exc
+
+            if self._should_retry(response, attempt):
+                delay = self._delay_for(response, attempt)
+                if delay > 0:
+                    transport.time.sleep(delay)
+                attempt += 1
+                continue
+            return self._success(response)
+
     def _get(self, path: str, params: Optional[dict[str, Any]] = None) -> Any:
-        response = self._client.get(
-            f"{self.base_url}{path}",
-            params=_clean_params(params or {}),
-            headers=self._headers(),
-        )
-        return self._handle(response)
+        return self._request("GET", path, params=params)
 
     def _post(self, path: str, json_body: dict[str, Any]) -> Any:
-        response = self._client.post(
-            f"{self.base_url}{path}",
-            json=json_body,
-            headers=self._headers(),
-        )
-        return self._handle(response)
+        return self._request("POST", path, json_body=json_body)
 
     def get_chains(self, include_chains: Optional[str] = None) -> list[Chain]:
         """List supported chains (``GET /chains``)."""
@@ -238,9 +300,11 @@ class AsyncRelayClient(_BaseRelayClient):
         api_key: Optional[str] = None,
         api_key_header: str = "x-api-key",
         timeout: float = 30.0,
+        max_retries: int = DEFAULT_MAX_RETRIES,
+        backoff_base: float = DEFAULT_BACKOFF_BASE,
         http_client: Optional[httpx.AsyncClient] = None,
     ) -> None:
-        super().__init__(base_url, api_key, api_key_header, timeout)
+        super().__init__(base_url, api_key, api_key_header, timeout, max_retries, backoff_base)
         self._client = http_client or httpx.AsyncClient(timeout=timeout)
         self._owns_client = http_client is None
 
@@ -259,21 +323,43 @@ class AsyncRelayClient(_BaseRelayClient):
         if self._owns_client:
             await self._client.aclose()
 
+    async def _request(
+        self,
+        method: str,
+        path: str,
+        *,
+        params: Optional[dict[str, Any]] = None,
+        json_body: Optional[dict[str, Any]] = None,
+    ) -> Any:
+        url = f"{self.base_url}{path}"
+        attempt = 0
+        while True:
+            try:
+                response = await self._client.request(
+                    method,
+                    url,
+                    params=_clean_params(params or {}),
+                    json=json_body,
+                    headers=self._headers(),
+                )
+            except httpx.TimeoutException as exc:
+                raise RelayTimeoutError(f"Request to {url} timed out") from exc
+            except httpx.TransportError as exc:
+                raise RelayConnectionError(f"Failed to connect to {url}: {exc}") from exc
+
+            if self._should_retry(response, attempt):
+                delay = self._delay_for(response, attempt)
+                if delay > 0:
+                    await transport.asyncio.sleep(delay)
+                attempt += 1
+                continue
+            return self._success(response)
+
     async def _get(self, path: str, params: Optional[dict[str, Any]] = None) -> Any:
-        response = await self._client.get(
-            f"{self.base_url}{path}",
-            params=_clean_params(params or {}),
-            headers=self._headers(),
-        )
-        return self._handle(response)
+        return await self._request("GET", path, params=params)
 
     async def _post(self, path: str, json_body: dict[str, Any]) -> Any:
-        response = await self._client.post(
-            f"{self.base_url}{path}",
-            json=json_body,
-            headers=self._headers(),
-        )
-        return self._handle(response)
+        return await self._request("POST", path, json_body=json_body)
 
     async def get_chains(self, include_chains: Optional[str] = None) -> list[Chain]:
         """List supported chains (``GET /chains``)."""

@@ -15,7 +15,13 @@ from .client import (
     AsyncRelayClient,
     RelayClient,
 )
-from .exceptions import RelayAPIError, RelayError
+from .exceptions import (
+    RelayAPIError,
+    RelayConnectionError,
+    RelayError,
+    RelayRateLimitError,
+    RelayTimeoutError,
+)
 from .models import (
     Chain,
     ChainCurrency,
@@ -45,6 +51,9 @@ __all__ = [
     "RelayClient",
     "RelayError",
     "RelayAPIError",
+    "RelayRateLimitError",
+    "RelayConnectionError",
+    "RelayTimeoutError",
     "Chain",
     "ChainCurrency",
     "ChainsResponse",

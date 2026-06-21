@@ -80,10 +80,24 @@ client = RelayClient(
     api_key="your-key",                 # optional; sent on every request
     api_key_header="x-api-key",         # configurable header name
     timeout=30.0,
+    max_retries=3,                      # retries for 429 / 5xx responses
+    backoff_base=0.5,                   # exponential backoff base (seconds)
 )
 ```
 
 Quotes are public and need no API key.
+
+### Retries and errors
+
+`429` and transient `5xx` responses are retried up to `max_retries` times with
+exponential backoff, honoring a `Retry-After` header when present. The
+exception hierarchy:
+
+- `RelayError` — base class for everything this library raises.
+  - `RelayAPIError` — non-2xx response; carries `status_code`, `message`, `body`.
+    - `RelayRateLimitError` — `429` after retries are exhausted; adds `retry_after`.
+  - `RelayConnectionError` — could not reach the API.
+  - `RelayTimeoutError` — the request timed out.
 
 ## API surface
 
@@ -99,15 +113,12 @@ Quotes are public and need no API key.
 
 `AsyncRelayClient` exposes the same methods as awaitables.
 
-Errors are raised as `RelayAPIError` (subclass of `RelayError`) carrying
-`status_code`, `message`, and the parsed `body`.
-
 ## Development
 
 ```bash
 uv pip install -e ".[dev]"
 ruff check .
-mypy src tests
+mypy --strict src tests
 pytest                  # unit tests (network mocked)
 pytest -m integration   # one live test against GET /chains
 ```
