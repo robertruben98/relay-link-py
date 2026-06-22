@@ -1,0 +1,6238 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Python client for the Relay Protocol API (relay.link) — fast crosschain bridge/swap across 70+ chains. Sync + async, Pydantic v2.">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>API reference - relay-link-py</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#api-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="relay-link-py" class="md-header__button md-logo" aria-label="relay-link-py" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            relay-link-py
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              API reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/robertruben98/relay-link-py" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    robertruben98/relay-link-py
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="relay-link-py" class="md-nav__button md-logo" aria-label="relay-link-py" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    relay-link-py
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/robertruben98/relay-link-py" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    robertruben98/relay-link-py
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#relay_link" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        relay_link
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="relay_link">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay_link--quickstart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quickstart
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AsyncRelayClient
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AsyncRelayClient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.__aenter__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __aenter__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.__aexit__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __aexit__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.aclose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        aclose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.get_chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_chains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.get_quote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_quote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.get_price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_price
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.get_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.get_requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_requests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.get_token_price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_token_price
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.poll_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        poll_status
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayClient
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RelayClient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.__enter__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __enter__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.__exit__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __exit__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.close" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        close
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.get_chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_chains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.get_quote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_quote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.get_price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_price
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.get_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.get_requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_requests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.get_token_price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_token_price
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.poll_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        poll_status
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayAPIError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayAPIError
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RelayAPIError">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayAPIError.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayAPIError.from_response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        from_response
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayConnectionError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayConnectionError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayRateLimitError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayRateLimitError
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RelayRateLimitError">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayRateLimitError.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayTimeoutError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayTimeoutError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.Chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.ChainCurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ChainCurrency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.ChainsResponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ChainsResponse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.Currency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Currency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.CurrencyMetadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CurrencyMetadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.Fee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fee
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.FeeBreakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FeeBreakdown
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.Price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Price
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.Quote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayRequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RequestsResponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RequestsResponse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.Step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.StepItem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StepItem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.TokenPrice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TokenPrice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.TradeType" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TradeType
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.TransactionStatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TransactionStatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.PriceRequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PriceRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.QuoteRequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QuoteRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#relay_link" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        relay_link
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="relay_link">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay_link--quickstart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quickstart
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AsyncRelayClient
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="AsyncRelayClient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.__aenter__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __aenter__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.__aexit__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __aexit__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.aclose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        aclose
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.get_chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_chains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.get_quote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_quote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.get_price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_price
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.get_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.get_requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_requests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.get_token_price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_token_price
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.AsyncRelayClient.poll_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        poll_status
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayClient
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RelayClient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.__enter__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __enter__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.__exit__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __exit__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.close" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        close
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.get_chains" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_chains
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.get_quote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_quote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.get_price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_price
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.get_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.get_requests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_requests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.get_token_price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        get_token_price
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayClient.poll_status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        poll_status
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayAPIError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayAPIError
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RelayAPIError">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayAPIError.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayAPIError.from_response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        from_response
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayConnectionError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayConnectionError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayRateLimitError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayRateLimitError
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="RelayRateLimitError">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayRateLimitError.__init__" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        __init__
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayTimeoutError" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayTimeoutError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.Chain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.ChainCurrency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ChainCurrency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.ChainsResponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ChainsResponse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.Currency" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Currency
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.CurrencyMetadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CurrencyMetadata
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.Fee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fee
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.FeeBreakdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FeeBreakdown
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.Price" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Price
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.Quote" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quote
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RelayRequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RelayRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.RequestsResponse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RequestsResponse
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.Step" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.StepItem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        StepItem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.TokenPrice" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TokenPrice
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.TradeType" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TradeType
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.TransactionStatus" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TransactionStatus
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.PriceRequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PriceRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relay_link.QuoteRequest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        QuoteRequest
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="api-reference">API reference</h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h2 id="relay_link" class="doc doc-heading">
+            <code>relay_link</code>
+
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+        <p>relay-link-py: a Python client for the Relay Protocol API (relay.link).</p>
+<h4 id="relay_link--quickstart">Quickstart</h4>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>from relay_link import RelayClient, TradeType
+client = RelayClient()
+chains = client.get_chains()</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.AsyncRelayClient" class="doc doc-heading">
+            <code>AsyncRelayClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.client._BaseRelayClient">_BaseRelayClient</span></code></p>
+
+
+
+        <p>Asynchronous client for the Relay Protocol API.</p>
+<p>Use it as an async context manager so the underlying HTTP connection is
+closed automatically:</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>async with AsyncRelayClient() as client:
+...     chains = await client.get_chains()</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>It mirrors :class:<code>RelayClient</code> exactly, with every method returning an
+awaitable. The same retry and error-handling behavior applies.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.AsyncRelayClient.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="n">DEFAULT_BASE_URL</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">api_key_header</span><span class="o">=</span><span class="s1">&#39;x-api-key&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="n">DEFAULT_MAX_RETRIES</span><span class="p">,</span> <span class="n">backoff_base</span><span class="o">=</span><span class="n">DEFAULT_BACKOFF_BASE</span><span class="p">,</span> <span class="n">http_client</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Create an asynchronous client.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>base_url</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Base URL of the Relay API. A trailing slash is stripped.</p>
+              </div>
+            </td>
+            <td>
+                  <code><span title="relay_link.client.DEFAULT_BASE_URL">DEFAULT_BASE_URL</span></code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>api_key</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional API key sent on every request.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>api_key_header</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Header name to send <code>api_key</code> under.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;x-api-key&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>timeout</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Per-request timeout in seconds (used only when this client
+creates its own HTTP client).</p>
+              </div>
+            </td>
+            <td>
+                  <code>30.0</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_retries</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Maximum retries for 429 and transient 5xx responses.</p>
+              </div>
+            </td>
+            <td>
+                  <code><span title="relay_link.client.DEFAULT_MAX_RETRIES">DEFAULT_MAX_RETRIES</span></code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>backoff_base</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Base delay in seconds for exponential backoff.</p>
+              </div>
+            </td>
+            <td>
+                  <code><span title="relay_link.client.DEFAULT_BACKOFF_BASE">DEFAULT_BACKOFF_BASE</span></code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>http_client</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="httpx.AsyncClient">AsyncClient</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An existing :class:<code>httpx.AsyncClient</code> to use. When
+given, the caller owns its lifecycle and :meth:<code>aclose</code> will not
+close it; otherwise the client creates and owns one.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.AsyncRelayClient.__aenter__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__aenter__</span><span class="p">()</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Enter the async context manager, returning this client.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.AsyncRelayClient.__aexit__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__aexit__</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">tb</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Exit the async context manager, closing the client.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.AsyncRelayClient.aclose" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">aclose</span><span class="p">()</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Close the underlying async HTTP client if this instance created it.</p>
+<p>A no-op when an <code>http_client</code> was supplied to the constructor.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.AsyncRelayClient.get_chains" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_chains</span><span class="p">(</span><span class="n">include_chains</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>List the chains supported by Relay (<code>GET /chains</code>).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>include_chains</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional comma-separated chain IDs to restrict the
+response to (e.g. <code>"1,10,8453"</code>).</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="list">list</span>[<a class="autorefs autorefs-internal" title="Chain (relay_link.models.Chain)" href="#relay_link.Chain">Chain</a>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The list of supported :class:<code>~relay_link.Chain</code> objects.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API returned a non-2xx response.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.AsyncRelayClient.get_quote" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_quote</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">origin_chain_id</span><span class="p">,</span> <span class="n">destination_chain_id</span><span class="p">,</span> <span class="n">origin_currency</span><span class="p">,</span> <span class="n">destination_currency</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">trade_type</span><span class="p">,</span> <span class="o">**</span><span class="n">extra</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get an executable quote for a bridge/swap/call (<code>POST /quote/v2</code>).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>user</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Address depositing funds and submitting transactions.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>origin_chain_id</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Chain ID to bridge/swap from.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>destination_chain_id</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Chain ID to bridge/swap to.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>origin_currency</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Origin token address (zero = native).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>destination_currency</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Destination token address (zero = native).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>amount</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Amount in the currency's smallest unit (e.g. wei), as a
+string.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>trade_type</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A :class:<code>~relay_link.TradeType</code> (or its string value)
+deciding whether <code>amount</code> is the input or desired output.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>**extra</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Any additional :class:<code>~relay_link.QuoteRequest</code> fields,
+e.g. <code>recipient</code>, <code>slippage_tolerance</code>, <code>app_fees</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>A</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="Quote (relay_link.models.Quote)" href="#relay_link.Quote">Quote</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>class:<code>~relay_link.Quote</code> with the steps to execute and the fee</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="Quote (relay_link.models.Quote)" href="#relay_link.Quote">Quote</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>breakdown.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API rejected the request (e.g. an invalid route).</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayRateLimitError (relay_link.exceptions.RelayRateLimitError)" href="#relay_link.RelayRateLimitError">RelayRateLimitError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Rate limited after retries were exhausted.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>async with AsyncRelayClient() as client:
+...     quote = await client.get_quote(
+...         user="0x03508bb71268bba25ecacc8f620e01866650532c",
+...         origin_chain_id=8453,
+...         destination_chain_id=10,
+...         origin_currency="0x0000000000000000000000000000000000000000",
+...         destination_currency="0x0000000000000000000000000000000000000000",
+...         amount="1000000000000000000",
+...         trade_type=TradeType.EXACT_INPUT,
+...     )</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.AsyncRelayClient.get_price" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_price</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">origin_chain_id</span><span class="p">,</span> <span class="n">destination_chain_id</span><span class="p">,</span> <span class="n">origin_currency</span><span class="p">,</span> <span class="n">destination_currency</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">trade_type</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">extra</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get a non-executable price estimate (<code>POST /price</code>).</p>
+<p>Like :meth:<code>get_quote</code> but returns only fees and swap details, with no
+executable steps.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>origin_chain_id</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Chain ID to bridge/swap from.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>destination_chain_id</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Chain ID to bridge/swap to.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>origin_currency</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Origin token address (zero = native).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>destination_currency</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Destination token address (zero = native).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>amount</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Amount in the currency's smallest unit, as a string.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>trade_type</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A :class:<code>~relay_link.TradeType</code> (or its string value).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>user</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional depositing address; not required for a price-only
+call.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>**extra</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Any additional :class:<code>~relay_link.PriceRequest</code> fields.</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>A</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="Price (relay_link.models.Price)" href="#relay_link.Price">Price</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>class:<code>~relay_link.Price</code> with the estimated fee breakdown and</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="Price (relay_link.models.Price)" href="#relay_link.Price">Price</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>swap details.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API rejected the request.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayRateLimitError (relay_link.exceptions.RelayRateLimitError)" href="#relay_link.RelayRateLimitError">RelayRateLimitError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Rate limited after retries were exhausted.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.AsyncRelayClient.get_status" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_status</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">request_id</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get the execution status of a request (<code>GET /intents/status/v3</code>).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>request_id</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request identifier from a quote step's
+<code>request_id</code>.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>A</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="TransactionStatus (relay_link.models.TransactionStatus)" href="#relay_link.TransactionStatus">TransactionStatus</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>class:<code>~relay_link.TransactionStatus</code> snapshot.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API returned a non-2xx response.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.AsyncRelayClient.get_requests" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_requests</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">hash</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">origin_chain_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">destination_chain_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">continuation</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>List relay requests (<code>GET /requests</code>).</p>
+<p>All filters are optional; omitted ones are not sent. Page through
+results by passing the previous response's <code>continuation</code> back in.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>user</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Filter to requests initiated by this address.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>hash</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Filter to a specific transaction hash.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>origin_chain_id</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Filter by origin chain ID.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>destination_chain_id</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Filter by destination chain ID.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>limit</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Maximum number of records to return.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>continuation</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Pagination cursor from a previous response.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>A</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="RequestsResponse (relay_link.models.RequestsResponse)" href="#relay_link.RequestsResponse">RequestsResponse</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>class:<code>~relay_link.RequestsResponse</code> page of records plus the</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="RequestsResponse (relay_link.models.RequestsResponse)" href="#relay_link.RequestsResponse">RequestsResponse</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>next <code>continuation</code> cursor.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API returned a non-2xx response.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.AsyncRelayClient.get_token_price" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_token_price</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">chain_id</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get a token's USD price (<code>GET /currencies/token/price</code>).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>address</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Token contract address.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>chain_id</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Chain ID the token lives on.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>A</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="TokenPrice (relay_link.models.TokenPrice)" href="#relay_link.TokenPrice">TokenPrice</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>class:<code>~relay_link.TokenPrice</code> with the USD price.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API returned a non-2xx response.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.AsyncRelayClient.poll_status" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">poll_status</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">request_id</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">120.0</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-async"><code>async</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Poll :meth:<code>get_status</code> until the request reaches a terminal state.</p>
+<p>Repeatedly calls :meth:<code>get_status</code>, awaiting <code>interval</code> seconds
+between polls, until <code>status</code> is one of
+:data:<code>~relay_link.TERMINAL_STATUSES</code> (<code>success</code>, <code>failure</code> or
+<code>refund</code>).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>request_id</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request identifier to poll.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>interval</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Seconds to wait between polls.</p>
+              </div>
+            </td>
+            <td>
+                  <code>2.0</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>timeout</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Maximum total seconds to poll before giving up.</p>
+              </div>
+            </td>
+            <td>
+                  <code>120.0</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="TransactionStatus (relay_link.models.TransactionStatus)" href="#relay_link.TransactionStatus">TransactionStatus</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The terminal :class:<code>~relay_link.TransactionStatus</code>.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayError (relay_link.exceptions.RelayError)" href="#relay_link.RelayError">RelayError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The timeout elapsed before reaching a terminal state.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A status request returned a non-2xx response.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A status request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.RelayClient" class="doc doc-heading">
+            <code>RelayClient</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.client._BaseRelayClient">_BaseRelayClient</span></code></p>
+
+
+
+        <p>Synchronous client for the Relay Protocol API.</p>
+<p>Use it as a context manager so the underlying HTTP connection is closed
+automatically:</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>with RelayClient() as client:
+...     chains = client.get_chains()</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>All methods raise a :class:<code>RelayError</code> subclass on failure (see the
+module's exception hierarchy). 429 and transient 5xx responses are retried
+transparently with exponential backoff.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayClient.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="n">DEFAULT_BASE_URL</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">api_key_header</span><span class="o">=</span><span class="s1">&#39;x-api-key&#39;</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">30.0</span><span class="p">,</span> <span class="n">max_retries</span><span class="o">=</span><span class="n">DEFAULT_MAX_RETRIES</span><span class="p">,</span> <span class="n">backoff_base</span><span class="o">=</span><span class="n">DEFAULT_BACKOFF_BASE</span><span class="p">,</span> <span class="n">http_client</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Create a synchronous client.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>base_url</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Base URL of the Relay API. A trailing slash is stripped.</p>
+              </div>
+            </td>
+            <td>
+                  <code><span title="relay_link.client.DEFAULT_BASE_URL">DEFAULT_BASE_URL</span></code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>api_key</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional API key sent on every request. Quotes are public
+and need no key.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>api_key_header</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Header name to send <code>api_key</code> under.</p>
+              </div>
+            </td>
+            <td>
+                  <code>&#39;x-api-key&#39;</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>timeout</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Per-request timeout in seconds (used only when this client
+creates its own HTTP client).</p>
+              </div>
+            </td>
+            <td>
+                  <code>30.0</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>max_retries</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Maximum retries for 429 and transient 5xx responses.</p>
+              </div>
+            </td>
+            <td>
+                  <code><span title="relay_link.client.DEFAULT_MAX_RETRIES">DEFAULT_MAX_RETRIES</span></code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>backoff_base</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Base delay in seconds for exponential backoff between
+retries.</p>
+              </div>
+            </td>
+            <td>
+                  <code><span title="relay_link.client.DEFAULT_BACKOFF_BASE">DEFAULT_BACKOFF_BASE</span></code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>http_client</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="httpx.Client">Client</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An existing :class:<code>httpx.Client</code> to use. When given,
+the caller owns its lifecycle and :meth:<code>close</code> will not close
+it; otherwise the client creates and owns one.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayClient.__enter__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__enter__</span><span class="p">()</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Enter the context manager, returning this client.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayClient.__exit__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__exit__</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">tb</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Exit the context manager, closing the client.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayClient.close" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">close</span><span class="p">()</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Close the underlying HTTP client if this instance created it.</p>
+<p>A no-op when an <code>http_client</code> was supplied to the constructor, since
+the caller owns that client's lifecycle.</p>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayClient.get_chains" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_chains</span><span class="p">(</span><span class="n">include_chains</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>List the chains supported by Relay (<code>GET /chains</code>).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>include_chains</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional comma-separated chain IDs to restrict the
+response to (e.g. <code>"1,10,8453"</code>).</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><span title="list">list</span>[<a class="autorefs autorefs-internal" title="Chain (relay_link.models.Chain)" href="#relay_link.Chain">Chain</a>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The list of supported :class:<code>~relay_link.Chain</code> objects.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API returned a non-2xx response.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayClient.get_quote" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_quote</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">origin_chain_id</span><span class="p">,</span> <span class="n">destination_chain_id</span><span class="p">,</span> <span class="n">origin_currency</span><span class="p">,</span> <span class="n">destination_currency</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">trade_type</span><span class="p">,</span> <span class="o">**</span><span class="n">extra</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get an executable quote for a bridge/swap/call (<code>POST /quote/v2</code>).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>user</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Address depositing funds and submitting transactions.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>origin_chain_id</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Chain ID to bridge/swap from.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>destination_chain_id</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Chain ID to bridge/swap to.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>origin_currency</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Origin token address (the zero address for the
+native gas currency).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>destination_currency</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Destination token address (zero = native).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>amount</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Amount in the currency's smallest unit (e.g. wei), as a
+string.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>trade_type</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A :class:<code>~relay_link.TradeType</code> (or its string value)
+deciding whether <code>amount</code> is the input or desired output.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>**extra</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Any additional :class:<code>~relay_link.QuoteRequest</code> fields,
+e.g. <code>recipient</code>, <code>slippage_tolerance</code>, <code>app_fees</code>.</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>A</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="Quote (relay_link.models.Quote)" href="#relay_link.Quote">Quote</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>class:<code>~relay_link.Quote</code> with the steps to execute and the fee</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="Quote (relay_link.models.Quote)" href="#relay_link.Quote">Quote</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>breakdown.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API rejected the request (e.g. an invalid route).</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayRateLimitError (relay_link.exceptions.RelayRateLimitError)" href="#relay_link.RelayRateLimitError">RelayRateLimitError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Rate limited after retries were exhausted.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<details class="example" open>
+  <summary>Example</summary>
+  <blockquote>
+<blockquote>
+<blockquote>
+<p>with RelayClient() as client:
+...     quote = client.get_quote(
+...         user="0x03508bb71268bba25ecacc8f620e01866650532c",
+...         origin_chain_id=8453,
+...         destination_chain_id=10,
+...         origin_currency="0x0000000000000000000000000000000000000000",
+...         destination_currency="0x0000000000000000000000000000000000000000",
+...         amount="1000000000000000000",  # 1 ETH in wei
+...         trade_type=TradeType.EXACT_INPUT,
+...     )
+for step in quote.steps:
+...     print(step.kind, step.id)</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</details>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayClient.get_price" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_price</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">origin_chain_id</span><span class="p">,</span> <span class="n">destination_chain_id</span><span class="p">,</span> <span class="n">origin_currency</span><span class="p">,</span> <span class="n">destination_currency</span><span class="p">,</span> <span class="n">amount</span><span class="p">,</span> <span class="n">trade_type</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">extra</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get a non-executable price estimate (<code>POST /price</code>).</p>
+<p>Like :meth:<code>get_quote</code> but returns only fees and swap details, with no
+executable steps — useful for display and comparison.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>origin_chain_id</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Chain ID to bridge/swap from.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>destination_chain_id</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Chain ID to bridge/swap to.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>origin_currency</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Origin token address (zero = native).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>destination_currency</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Destination token address (zero = native).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>amount</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Amount in the currency's smallest unit, as a string.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>trade_type</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A :class:<code>~relay_link.TradeType</code> (or its string value).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>user</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Optional depositing address; not required for a price-only
+call.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>**extra</code>
+            </td>
+            <td>
+                  <code><span title="typing.Any">Any</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Any additional :class:<code>~relay_link.PriceRequest</code> fields.</p>
+              </div>
+            </td>
+            <td>
+                  <code>{}</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>A</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="Price (relay_link.models.Price)" href="#relay_link.Price">Price</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>class:<code>~relay_link.Price</code> with the estimated fee breakdown and</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="Price (relay_link.models.Price)" href="#relay_link.Price">Price</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>swap details.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API rejected the request.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayRateLimitError (relay_link.exceptions.RelayRateLimitError)" href="#relay_link.RelayRateLimitError">RelayRateLimitError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Rate limited after retries were exhausted.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayClient.get_status" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_status</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">request_id</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get the execution status of a request (<code>GET /intents/status/v3</code>).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>request_id</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request identifier from a quote step's
+<code>request_id</code>.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>A</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="TransactionStatus (relay_link.models.TransactionStatus)" href="#relay_link.TransactionStatus">TransactionStatus</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>class:<code>~relay_link.TransactionStatus</code> snapshot.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API returned a non-2xx response.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayClient.get_requests" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_requests</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">hash</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">origin_chain_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">destination_chain_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">continuation</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>List relay requests (<code>GET /requests</code>).</p>
+<p>All filters are optional; omitted ones are not sent. Page through
+results by passing the previous response's <code>continuation</code> back in.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>user</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Filter to requests initiated by this address.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>hash</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Filter to a specific transaction hash.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>origin_chain_id</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Filter by origin chain ID.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>destination_chain_id</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Filter by destination chain ID.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>limit</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Maximum number of records to return.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>continuation</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Pagination cursor from a previous response.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>A</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="RequestsResponse (relay_link.models.RequestsResponse)" href="#relay_link.RequestsResponse">RequestsResponse</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>class:<code>~relay_link.RequestsResponse</code> page of records plus the</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+<td></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="RequestsResponse (relay_link.models.RequestsResponse)" href="#relay_link.RequestsResponse">RequestsResponse</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>next <code>continuation</code> cursor.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API returned a non-2xx response.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayClient.get_token_price" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">get_token_price</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">chain_id</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Get a token's USD price (<code>GET /currencies/token/price</code>).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>address</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Token contract address.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>chain_id</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Chain ID the token lives on.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>A</code></td>            <td>
+                  <code><a class="autorefs autorefs-internal" title="TokenPrice (relay_link.models.TokenPrice)" href="#relay_link.TokenPrice">TokenPrice</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>class:<code>~relay_link.TokenPrice</code> with the USD price.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API returned a non-2xx response.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayClient.poll_status" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">poll_status</span><span class="p">(</span><span class="o">*</span><span class="p">,</span> <span class="n">request_id</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mf">120.0</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Poll :meth:<code>get_status</code> until the request reaches a terminal state.</p>
+<p>Repeatedly calls :meth:<code>get_status</code>, sleeping <code>interval</code> seconds
+between polls, until <code>status</code> is one of
+:data:<code>~relay_link.TERMINAL_STATUSES</code> (<code>success</code>, <code>failure</code> or
+<code>refund</code>).</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>request_id</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The request identifier to poll.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>interval</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Seconds to wait between polls.</p>
+              </div>
+            </td>
+            <td>
+                  <code>2.0</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>timeout</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Maximum total seconds to poll before giving up.</p>
+              </div>
+            </td>
+            <td>
+                  <code>120.0</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="TransactionStatus (relay_link.models.TransactionStatus)" href="#relay_link.TransactionStatus">TransactionStatus</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The terminal :class:<code>~relay_link.TransactionStatus</code>.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+<p><span class="doc-section-title">Raises:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayError (relay_link.exceptions.RelayError)" href="#relay_link.RelayError">RelayError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The timeout elapsed before reaching a terminal state.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A status request returned a non-2xx response.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayConnectionError (relay_link.exceptions.RelayConnectionError)" href="#relay_link.RelayConnectionError">RelayConnectionError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The API could not be reached.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayTimeoutError (relay_link.exceptions.RelayTimeoutError)" href="#relay_link.RelayTimeoutError">RelayTimeoutError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A status request timed out.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.RelayAPIError" class="doc doc-heading">
+            <code>RelayAPIError</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="RelayError (relay_link.exceptions.RelayError)" href="#relay_link.RelayError">RelayError</a></code></p>
+
+
+
+        <p>Raised when the Relay API returns a non-2xx response.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="relay_link.RelayAPIError.status_code">status_code</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The HTTP status code of the response.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="relay_link.RelayAPIError.message">message</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>A human-readable message, extracted from the response body
+when possible (the <code>message</code> or <code>error</code> field), else the
+HTTP reason phrase.</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td><code><span title="relay_link.RelayAPIError.body">body</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The parsed JSON body, or <code>None</code> if it was not valid JSON.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayAPIError.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">status_code</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Build an API error.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>status_code</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>HTTP status code of the failing response.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>message</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Human-readable error message.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>body</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Parsed response body, if any.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayAPIError.from_response" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">from_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span></code>
+
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Construct an error from an httpx response.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>response</code>
+            </td>
+            <td>
+                  <code><span title="httpx.Response">Response</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The non-2xx response to wrap.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>An instance of <code>cls</code> whose <code>message</code> is taken from the body's</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p><code>message</code>/<code>error</code> field when present, otherwise the HTTP reason</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>phrase. <code>body</code> holds the parsed JSON, or <code>None</code> if the body is</p>
+              </div>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>not valid JSON.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.RelayConnectionError" class="doc doc-heading">
+            <code>RelayConnectionError</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="RelayError (relay_link.exceptions.RelayError)" href="#relay_link.RelayError">RelayError</a></code></p>
+
+
+
+        <p>Raised when the request fails to reach the API.</p>
+<p>Wraps a non-timeout :class:<code>httpx.TransportError</code> (e.g. a refused or reset
+connection, or DNS failure). The original exception is available via
+<code>__cause__</code>.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.RelayError" class="doc doc-heading">
+            <code>RelayError</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="Exception">Exception</span></code></p>
+
+
+
+        <p>Base class for every error raised by this library.</p>
+<p>Catch this to handle any failure — API errors, rate limiting, connection
+failures and timeouts all subclass it.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.RelayRateLimitError" class="doc doc-heading">
+            <code>RelayRateLimitError</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="RelayAPIError (relay_link.exceptions.RelayAPIError)" href="#relay_link.RelayAPIError">RelayAPIError</a></code></p>
+
+
+
+        <p>Raised on HTTP 429 once retries are exhausted.</p>
+<p>A subclass of :class:<code>RelayAPIError</code>, so <code>status_code</code> (always 429),
+<code>message</code> and <code>body</code> are available too.</p>
+
+
+<p><span class="doc-section-title">Attributes:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td><code><span title="relay_link.RelayRateLimitError.retry_after">retry_after</span></code></td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The server-advised wait in seconds parsed from the
+<code>Retry-After</code> header, or <code>None</code> when the header was absent or
+unparseable.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+<h4 id="relay_link.RelayRateLimitError.__init__" class="doc doc-heading">
+            <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">status_code</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retry_after</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+</h4>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Build a rate-limit error.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>status_code</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>HTTP status code (429).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>message</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Human-readable error message.</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>body</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Any">Any</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Parsed response body, if any.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>retry_after</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="float">float</span>]</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Server-advised wait in seconds, if available.</p>
+              </div>
+            </td>
+            <td>
+                  <code>None</code>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    </div>
+
+</div>
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.RelayTimeoutError" class="doc doc-heading">
+            <code>RelayTimeoutError</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="RelayError (relay_link.exceptions.RelayError)" href="#relay_link.RelayError">RelayError</a></code></p>
+
+
+
+        <p>Raised when the request to the API times out.</p>
+<p>Wraps an :class:<code>httpx.TimeoutException</code> (connect, read, write or pool
+timeout). The original exception is available via <code>__cause__</code>.</p>
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.Chain" class="doc doc-heading">
+            <code>Chain</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>A chain supported by Relay (<code>GET /chains</code>).</p>
+<p>Only <code>id</code> is guaranteed present; everything else is optional because the
+API tailors the payload to the chain and request.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.ChainCurrency" class="doc doc-heading">
+            <code>ChainCurrency</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>The native currency of a :class:<code>Chain</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.ChainsResponse" class="doc doc-heading">
+            <code>ChainsResponse</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>Wrapper for the <code>GET /chains</code> response body.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.Currency" class="doc doc-heading">
+            <code>Currency</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>A token on a specific chain, as returned inside fees and quote details.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.CurrencyMetadata" class="doc doc-heading">
+            <code>CurrencyMetadata</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>Display and classification metadata for a :class:<code>Currency</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.Fee" class="doc doc-heading">
+            <code>Fee</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>A single fee bucket: the currency charged plus its amounts.</p>
+<p><code>amount</code> is the raw value in the currency's smallest unit;
+<code>amount_formatted</code> is the same value scaled by <code>decimals</code>; and
+<code>amount_usd</code> is the USD equivalent. Some buckets (e.g. <code>relayer_service</code>)
+can be negative, representing a network reward rather than a charge.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.FeeBreakdown" class="doc doc-heading">
+            <code>FeeBreakdown</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>The set of fee buckets returned with a :class:<code>Quote</code> or :class:<code>Price</code>.</p>
+<p>Every bucket is optional; the API only populates the ones relevant to the
+route. <code>relayer</code> is the sum of <code>relayer_gas</code> and <code>relayer_service</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.Price" class="doc doc-heading">
+            <code>Price</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>A non-executable price estimate (<code>POST /price</code>).</p>
+<p>Returned by :meth:<code>relay_link.RelayClient.get_price</code>. Unlike :class:<code>Quote</code>
+it contains no executable steps — only the fee breakdown and swap details.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.Quote" class="doc doc-heading">
+            <code>Quote</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>An executable quote: the steps to run plus the fee breakdown.</p>
+<p>Returned by :meth:<code>relay_link.RelayClient.get_quote</code>. <code>details</code>,
+<code>fee_sponsorship</code> and <code>protocol</code> are intentionally loose dicts — they
+are large, optional, and evolve frequently, so they are passed through
+verbatim rather than modeled exhaustively.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.RelayRequest" class="doc doc-heading">
+            <code>RelayRequest</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>A single relay request record (<code>GET /requests</code>).</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.RequestsResponse" class="doc doc-heading">
+            <code>RequestsResponse</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>Paginated response for <code>GET /requests</code>.</p>
+<p>Returned by :meth:<code>relay_link.RelayClient.get_requests</code>. Pass
+<code>continuation</code> back into the next call to page through results.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.Step" class="doc doc-heading">
+            <code>Step</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>One step (signature or transaction) required to execute a quote.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.StepItem" class="doc doc-heading">
+            <code>StepItem</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>A single signature or transaction within a :class:<code>Step</code>.</p>
+<p>A step may bundle several items of the same kind that can be executed
+together. <code>data</code> holds the kind-specific payload to sign or submit.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.TokenPrice" class="doc doc-heading">
+            <code>TokenPrice</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>Token price in USD (<code>GET /currencies/token/price</code>).</p>
+<p>Returned by :meth:<code>relay_link.RelayClient.get_token_price</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.TradeType" class="doc doc-heading">
+            <code>TradeType</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="str">str</span></code>, <code><span title="enum.Enum">Enum</span></code></p>
+
+
+
+        <p>Whether <code>amount</code> is the input or the desired output of the swap.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.TransactionStatus" class="doc doc-heading">
+            <code>TransactionStatus</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.models.RelayModel">RelayModel</span></code></p>
+
+
+
+        <p>Execution status of a relay request (<code>GET /intents/status/v3</code>).</p>
+<p>Returned by :meth:<code>relay_link.RelayClient.get_status</code>. <code>status</code> reaches a
+terminal value of <code>success</code>, <code>failure</code> or <code>refund</code> (see
+:data:<code>relay_link.TERMINAL_STATUSES</code>); intermediate values include
+<code>waiting</code>, <code>pending</code>, <code>depositing</code> and <code>submitted</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.PriceRequest" class="doc doc-heading">
+            <code>PriceRequest</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.requests._RequestBase">_RequestBase</span></code></p>
+
+
+
+        <p>Body for <code>POST /price</code> (non-executable price estimate).</p>
+<p>Like :class:<code>QuoteRequest</code> but <code>user</code> is optional, and the response
+contains no executable steps. Usually built for you by
+:meth:<code>relay_link.RelayClient.get_price</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+<h3 id="relay_link.QuoteRequest" class="doc doc-heading">
+            <code>QuoteRequest</code>
+
+
+</h3>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><span title="relay_link.requests._RequestBase">_RequestBase</span></code></p>
+
+
+
+        <p>Body for <code>POST /quote/v2</code> (and the deprecated <code>POST /quote</code>).</p>
+<p>The first seven fields are required; the rest are optional tuning knobs that
+are only sent when set. Usually built for you by
+:meth:<code>relay_link.RelayClient.get_quote</code>, but exposed for callers that want
+to construct and reuse a request explicitly.</p>
+
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
